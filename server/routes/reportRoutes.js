@@ -1,12 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const { submitReport } = require("../controllers/reportController");
-const multer = require("multer");
-const verifyToken = require("../middleware/authMiddleware");
+const {
+  createReport,
+  getReports,
+  getReport,
+  updateReport,
+  deleteReport,
+} = require("../controllers/reportController");
 
-const upload = multer({ dest: "uploads/" });
-
-// Protect this route with JWT token
-router.post("/reports", verifyToken, upload.single("photo"), submitReport);
+router.post("/reports", createReport);
+router.get("/reports", getReports);
+router.get("/reports/:id", getReport);
+router.put("/reports/:id", updateReport);
+router.delete("/reports/:id", deleteReport);
 
 module.exports = router;
