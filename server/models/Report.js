@@ -21,6 +21,7 @@ const reportSchema = new mongoose.Schema(
     description: {
       type: String,
       required: true,
+      maxlength: 1000,
     },
     location: {
       type: {
@@ -31,6 +32,18 @@ const reportSchema = new mongoose.Schema(
       coordinates: {
         type: [Number],
         required: true,
+        validate: {
+          validator: function (v) {
+            return (
+              v.length === 2 &&
+              v[0] >= -180 &&
+              v[0] <= 180 &&
+              v[1] >= -90 &&
+              v[1] <= 90
+            );
+          },
+          message: (props) => `${props.value} is not a valid location!`,
+        },
       },
     },
     photo: {
@@ -45,6 +58,26 @@ const reportSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    assignedTo: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    resolvedAt: {
+      type: Date,
+    },
+    notes: [
+      {
+        text: String,
+        createdBy: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );

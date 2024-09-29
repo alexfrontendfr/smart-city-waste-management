@@ -40,14 +40,13 @@ This project is a comprehensive waste management solution for Swiss municipaliti
    npm install
 
 3. Install frontend dependencies:
-   cd ../client
+   cd client
    npm install
-
 4. Set up environment variables:
 
 - Create a `.env` file in the `server` directory with the following content:
   ```
-  MONGODB_URI=your_mongodb_connection_string
+  MONGO_URI=your_mongodb_connection_string
   JWT_SECRET=your_jwt_secret
   ```
 - Create a `.env` file in the `client` directory with the following content:
@@ -56,26 +55,14 @@ This project is a comprehensive waste management solution for Swiss municipaliti
   ```
 
 5. Start the backend server:
-   cd ../server
-   npm start
+   cd /server
+   node server.js
 
 6. Start the frontend development server:
-   cd ../client
+   cd client
    npm start
 
 7. Open your browser and navigate to `http://localhost:3000`
-
-## Deployment
-
-For deployment to a production environment, follow these steps:
-
-1. Build the frontend:
-   cd client
-   npm run build
-
-2. Set up a production-ready MongoDB instance
-3. Configure your web server (e.g., Nginx) to serve the static files from the `client/build` directory
-4. Set up a process manager (e.g., PM2) to run the backend server
 
 ## Contributing
 
